@@ -1,17 +1,10 @@
 {
-	"extends": [
-		"config:base"
-	],
-	"includeForks": true,
-	"packageRules": [
-		{
-			"updateTypes": [
-				"minor",
-				"patch",
-				"pin",
-				"digest"
-			],
-			"automerge": true
-		}
-	]
+  "extends": ["config:base", ":dependencyDashboard"],
+  "includeForks": true,
+  "packageRules": [
+    {
+      "updateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ]
 }
