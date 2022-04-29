@@ -17,10 +17,6 @@
     <description>Store Product Composite Service Spring Boot based project</description>
     <packaging>jar</packaging>
 
-    <properties>
-        <resilience4j.version>0.14.1</resilience4j.version>
-    </properties>
-
     <dependencies>
         <!-- Start - API documentation dependencies -->
         <dependency>
@@ -54,24 +50,8 @@
         <!-- End - Security dependency -->
         <!-- Start - Circuit Breaker & Retry support dependency -->
         <dependency>
-            <groupId>io.github.resilience4j</groupId>
-            <artifactId>resilience4j-spring-boot2</artifactId>
-            <version>${resilience4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.resilience4j</groupId>
-            <artifactId>resilience4j-reactor</artifactId>
-            <version>${resilience4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.resilience4j</groupId>
-            <artifactId>resilience4j-circuitbreaker</artifactId>
-            <version>${resilience4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.resilience4j</groupId>
-            <artifactId>resilience4j-micrometer</artifactId>
-            <version>${resilience4j.version}</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
         </dependency>
         <!-- End - Circuit Breaker & Retry support dependency -->
     </dependencies>
