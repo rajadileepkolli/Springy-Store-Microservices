@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base", ":dependencyDashboard"],
+  "extends": ["config:base"],
   "includeForks": true,
   "packageRules": [
     {
