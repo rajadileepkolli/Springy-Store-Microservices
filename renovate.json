@@ -7,8 +7,7 @@
       "automerge": true
     }
   ],
-  "git-submodules": {
-    "enabled": true
-  },
-  "labels": ["dependencies"]
+  "labels": ["dependencies"],
+  "assignees" : ["rajadileepkolli"],
+  "cloneSubmodules" : true
 }
