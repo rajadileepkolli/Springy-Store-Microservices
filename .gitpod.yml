@@ -12,3 +12,6 @@ ports:
   - port: 8443
     visibility: public
     onOpen: open-browser
+  - port: 5672
+    visibility: public
+    onOpen: open-browser

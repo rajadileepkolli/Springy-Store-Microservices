@@ -26,3 +26,5 @@ jobs:
       run: |
         ./setup.sh
         ./mvnw clean verify -Ddockerfile.skip
+        docker compose -p ssm up -d
+        ./test-em-all.sh start stop
