@@ -1,7 +1,7 @@
 #### Start of builder image
 # ------------------------
 # Builder stage to prepare application for final image
-FROM openjdk:15-slim-buster as builder
+FROM openjdk:19-slim-buster as builder
 WORKDIR temp
 
 # Fatjar location, but could be set to different location from command line
@@ -17,7 +17,7 @@ RUN java -Djarmode=layertools -jar --enable-preview application.jar extract
 #### Start of actual image
 # ------------------------
 # Build image based on latest JDK 15 base image, based on latest debian buster OS
-FROM openjdk:15-slim-buster
+FROM openjdk:19-slim-buster
 
 # Set image information, but could be set to different location from command line
 ARG IMAGE_VERSION="0.0.1-SNAPSHOT"
