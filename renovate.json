@@ -8,6 +8,11 @@
     }
   ],
   "labels": ["dependencies"],
-  "assignees" : ["rajadileepkolli"],
-  "cloneSubmodules" : true
+  "assignees" : ["@rajadileepkolli"],
+  "cloneSubmodules" : true,
+  "vulnerabilityAlerts": {
+    "labels": ["security"],
+    "automerge": true,
+    "assignees": ["@rajadileepkolli"]
+  }
 }
