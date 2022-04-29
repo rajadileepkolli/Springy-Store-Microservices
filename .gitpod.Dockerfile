@@ -1,4 +1,4 @@
 FROM gitpod/workspace-full
 
 RUN bash -c ". /home/gitpod/.sdkman/bin/sdkman-init.sh \
-              && sdk update && sdk list java && sdk install java 15.0.0-librca && sdk default java 15.0.0-librca"
+              && sdk update && sdk list java && sdk install java 18.0.1-amzn && sdk default java 18.0.1-amzn"
