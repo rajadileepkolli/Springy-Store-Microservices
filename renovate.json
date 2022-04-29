@@ -13,6 +13,6 @@
   "vulnerabilityAlerts": {
     "labels": ["security"],
     "automerge": true,
-    "assignees": ["@rarkins"]
+    "assignees": ["@rajadileepkolli"]
   }
 }
