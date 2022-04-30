@@ -138,19 +138,19 @@ resilience4j.retry:
 # Also profiles could be separated in its owen file
 # with file name format of "application-docker.yaml"
 ---
-spring.profiles: docker
+spring.config.activate.on-profile: docker
 
 server.port: 8080
 
 ---
 spring:
-  profiles: external-OAuth-Provider
+  config.activate.on-profile: external-OAuth-Provider
   security.oauth2.resourceserver:
     jwt.jwk-set-uri: https://dev-taman.eu.auth0.com/.well-known/jwks.json
 
 ---
 spring:
-  profiles: streaming_partitioned
+  config.activate.on-profile: streaming_partitioned
   cloud.stream.bindings:
     output-products.producer:
       partition-key-expression: payload.key

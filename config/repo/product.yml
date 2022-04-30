@@ -41,22 +41,22 @@ logging.level:
 # Also profiles could be separated in its owen file
 # with file name format of "application-docker.yaml"
 ---
-spring.profiles: docker
+spring.config.activate.on-profile: docker
 server.port: 8080
 
 ---
 spring:
-  profiles: streaming_partitioned
+  config.activate.on-profile: streaming_partitioned
   cloud.stream.bindings.input.consumer:
     partitioned: true
     instanceCount: 2
 
 ---
 spring:
-  profiles: streaming_instance_0
+  config.activate.on-profile: streaming_instance_0
   cloud.stream.bindings.input.consumer.instanceIndex: 0
 
 ---
 spring:
-  profiles: streaming_instance_1
+  config.activate.on-profile: streaming_instance_1
   cloud.stream.bindings.input.consumer.instanceIndex: 1
