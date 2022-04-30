@@ -29,6 +29,6 @@ logging:
         root: info
 ---
 spring:
-    profiles: docker
+    config.activate.on-profile: docker
     cloud:
         config.server.native.searchLocations: file:/config/repo
