@@ -86,7 +86,7 @@ logging.level:
 # docker profile
 ---
 spring:
-  profiles: docker
+  config.activate.on-profile: docker
   jmx.enabled: false
 
 app:
@@ -104,7 +104,7 @@ app:
 # Kafka profile
 ---
 spring:
-  profiles: kafka
+  config.activate.on-profile: kafka
   cloud.stream.defaultBinder: kafka
   zipkin.sender.type: kafka
   kafka.bootstrap-servers: kafka:9092
