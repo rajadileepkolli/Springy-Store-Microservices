@@ -185,7 +185,7 @@ services:
   ## Start - MySql database definition
   ### $ mysql -uroot -h127.0.0.1 -p
   mysql:
-    image: mysql:8.0.31
+    image: mysql:8.0.32
     ports:
       - "3306:3306"
     environment:
