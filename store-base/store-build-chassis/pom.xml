@@ -34,7 +34,7 @@
         <maven.plugin.dockerfile.version>1.4.13</maven.plugin.dockerfile.version>
         <springfox.swagger.version>3.0.0</springfox.swagger.version>
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
-        <org.lombok.version>1.18.24</org.lombok.version>
+        <org.lombok.version>1.18.26</org.lombok.version>
 
         <!--Plugins control points -->
         <maven.deploy.skip>true</maven.deploy.skip>
