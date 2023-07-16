@@ -8,10 +8,6 @@ spring:
     # production environment!
     hibernate.ddl-auto: none
   datasource:
-    ## You often do not need to specify the driver-class-name,
-    ## since Spring Boot can deduce it for most databases from the url.
-    #driver-class-name: com.mysql.cj.jdbc.Driver
-    platform: mysql
     url: "jdbc:mysql://${app.database.mysql.host}/review-db?useSSL=false&serverTimezone=UTC"
     username: user
     password: pwd
@@ -44,6 +40,7 @@ spring:
         republishToDlq: true
       kafka:
         bindings.input.consumer.enableDlq: true
+  sql.init.platform: mysql
 
 app:
   database:
@@ -65,7 +62,7 @@ logging.level:
 # with file name format of "application-docker.yaml"
 ---
 spring:
-  profiles: docker
+  config.activate.on-profile: docker
   datasource:
     url: "jdbc:mysql://${app.database.mysql.host}/${app.database.mysql.schema}"
 
@@ -80,17 +77,17 @@ app:
 
 ---
 spring:
-  profiles: streaming_partitioned
+  config.activate.on-profile: streaming_partitioned
   cloud.stream.bindings.input.consumer:
     partitioned: true
     instanceCount: 2
 
 ---
 spring:
-  profiles: streaming_instance_0
+  config.activate.on-profile: streaming_instance_0
   cloud.stream.bindings.input.consumer.instanceIndex: 0
 
 ---
 spring:
-  profiles: streaming_instance_1
+  config.activate.on-profile: streaming_instance_1
   cloud.stream.bindings.input.consumer.instanceIndex: 1

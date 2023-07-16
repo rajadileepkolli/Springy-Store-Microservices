@@ -31,5 +31,5 @@ public interface RecommendationEndpoint extends RecommendationService {
    */
   @GetMapping(produces = APPLICATION_JSON_VALUE)
   @Override
-  Flux<Recommendation> getRecommendations(@RequestParam("productId") int productId);
+  Flux<Recommendation> getRecommendations(@RequestParam int productId);
 }

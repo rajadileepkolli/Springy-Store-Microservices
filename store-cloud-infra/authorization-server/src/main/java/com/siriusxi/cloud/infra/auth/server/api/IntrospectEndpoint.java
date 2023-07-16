@@ -27,7 +27,7 @@ class IntrospectEndpoint {
 
   @PostMapping("/introspect")
   @ResponseBody
-  public Map<String, Object> introspect(@RequestParam("token") String token) {
+  public Map<String, Object> introspect(@RequestParam String token) {
     OAuth2AccessToken accessToken = this.tokenStore.readAccessToken(token);
     Map<String, Object> attributes = new HashMap<>();
     if (accessToken == null || accessToken.isExpired()) {

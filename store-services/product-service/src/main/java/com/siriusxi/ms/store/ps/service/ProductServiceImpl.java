@@ -7,7 +7,6 @@ import com.siriusxi.ms.store.util.exceptions.InvalidInputException;
 import com.siriusxi.ms.store.util.exceptions.NotFoundException;
 import com.siriusxi.ms.store.util.http.ServiceUtil;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -28,7 +27,6 @@ public class ProductServiceImpl implements ProductService {
   private final ProductMapper mapper;
   private final Random randomNumberGenerator = new Random();
 
-  @Autowired
   public ProductServiceImpl(
       ProductRepository repository, ProductMapper mapper, ServiceUtil serviceUtil) {
     this.repository = repository;

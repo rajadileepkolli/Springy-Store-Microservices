@@ -5,6 +5,8 @@ import org.springframework.security.config.annotation.web.reactive.EnableWebFlux
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 /**
  * This SecurityConfig class allows
  * <pre>StoreServiceApplication</pre> to act as oauth2 Resource Server.
@@ -18,16 +20,15 @@ public class SecurityConfig {
 
     @Bean
     SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http)  {
-    http.csrf().disable()
-        .authorizeExchange()
-            .pathMatchers("/headerrouting/**").permitAll()
-            .pathMatchers("/actuator/**").permitAll()
-            .pathMatchers("/eureka/**").permitAll()
-            .pathMatchers("/oauth/**").permitAll()
-            .anyExchange().authenticated()
-        .and()
-            .oauth2ResourceServer()
-            .jwt();
+      http.csrf(withDefaults()).disable()
+              .authorizeExchange(exchange -> exchange
+                      .pathMatchers("/headerrouting/**").permitAll()
+                      .pathMatchers("/actuator/**").permitAll()
+                      .pathMatchers("/eureka/**").permitAll()
+                      .pathMatchers("/oauth/**").permitAll()
+                      .anyExchange().authenticated())
+              .oauth2ResourceServer(server -> server
+                      .jwt());
 
     return http.build();
     }

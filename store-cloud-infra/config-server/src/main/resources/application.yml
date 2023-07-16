@@ -13,7 +13,7 @@ spring:
         config:
             server:
                 native:
-                    searchLocations: file:@parent.basedir@/../config/repo
+                    searchLocations: file:009bcc21-0080-434c-92d6-2c1a6c7726d4/../config/repo
     security:
         user:
             name: dev-usr
@@ -29,6 +29,6 @@ logging:
         root: info
 ---
 spring:
-    profiles: docker
+    config.activate.on-profile: docker
     cloud:
         config.server.native.searchLocations: file:/config/repo

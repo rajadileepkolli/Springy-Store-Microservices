@@ -1,7 +1,6 @@
 package com.siriusxi.cloud.infra.gateway.config;
 
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.CompositeReactiveHealthContributor;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.ReactiveHealthContributor;
@@ -22,7 +21,6 @@ public class GatewayConfiguration {
 
   private WebClient webClient;
 
-  @Autowired
   public GatewayConfiguration(WebClient.Builder webClientBuilder) {
     this.webClientBuilder = webClientBuilder;
   }

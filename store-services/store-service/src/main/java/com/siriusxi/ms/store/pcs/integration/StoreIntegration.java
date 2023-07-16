@@ -14,7 +14,6 @@ import com.siriusxi.ms.store.util.http.HttpErrorInfo;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.Output;
@@ -51,7 +50,6 @@ public class StoreIntegration implements ProductService, RecommendationService, 
   private final int productServiceTimeoutSec;
   private WebClient webClient;
 
-  @Autowired
   public StoreIntegration(
           WebClient.Builder webClientBuilder,
           ObjectMapper mapper,

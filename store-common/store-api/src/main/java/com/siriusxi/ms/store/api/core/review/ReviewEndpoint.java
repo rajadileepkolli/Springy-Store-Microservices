@@ -32,5 +32,5 @@ public interface ReviewEndpoint extends ReviewService {
    */
   @GetMapping(produces = APPLICATION_JSON_VALUE)
   @Override
-  Flux<Review> getReviews(@RequestParam("productId") int productId);
+  Flux<Review> getReviews(@RequestParam int productId);
 }

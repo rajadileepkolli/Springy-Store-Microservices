@@ -24,27 +24,21 @@ public class SecurityConfig {
   @Bean
   SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
     var baseUri = "/store/api/v1/products/**";
-    /*
-     By convention, OAuth 2.0 scopes should be prefixed with SCOPE_
-     when checked for authority using Spring Security.
-    */
-    http.authorizeExchange()
-          .pathMatchers("/actuator/**").permitAll()
-          .pathMatchers(POST, baseUri).hasAuthority("SCOPE_product:write")
-          .pathMatchers(DELETE, baseUri).hasAuthority("SCOPE_product:write")
-          .pathMatchers(GET, baseUri).hasAuthority("SCOPE_product:read")
-        // Ensures that the user is authenticated before being allowed access to all other URLs
-        .anyExchange().authenticated()
-        .and()
-        /*
-         1. specifies that authentication and authorization will be based on
-         a JWT-encoded OAuth 2.0 access token
-
-         2. The endpoint of the authorization server's jwk-set endpoint has been
-         registered in the configuration file, store.yml
-        */
-        .oauth2ResourceServer()
-          .jwt();
+    http.authorizeExchange(exchange -> exchange
+            .pathMatchers("/actuator/**").permitAll()
+            .pathMatchers(POST, baseUri).hasAuthority("SCOPE_product:write")
+            .pathMatchers(DELETE, baseUri).hasAuthority("SCOPE_product:write")
+            .pathMatchers(GET, baseUri).hasAuthority("SCOPE_product:read")
+            // Ensures that the user is authenticated before being allowed access to all other URLs
+            .anyExchange().authenticated())
+            /*
+             1. specifies that authentication and authorization will be based on
+             a JWT-encoded OAuth 2.0 access token
+              2. The endpoint of the authorization server's jwk-set endpoint has been
+             registered in the configuration file, store.yml
+            */
+            .oauth2ResourceServer(server -> server
+                    .jwt());
 
     return http.build();
   }

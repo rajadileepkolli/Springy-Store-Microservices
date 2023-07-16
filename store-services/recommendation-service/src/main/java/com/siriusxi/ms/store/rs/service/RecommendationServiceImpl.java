@@ -6,7 +6,6 @@ import com.siriusxi.ms.store.rs.persistence.RecommendationRepository;
 import com.siriusxi.ms.store.util.exceptions.InvalidInputException;
 import com.siriusxi.ms.store.util.http.ServiceUtil;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -21,7 +20,6 @@ public class RecommendationServiceImpl implements RecommendationService {
 
   private final ServiceUtil serviceUtil;
 
-  @Autowired
   public RecommendationServiceImpl(
       RecommendationRepository repository, RecommendationMapper mapper, ServiceUtil serviceUtil) {
     this.repository = repository;

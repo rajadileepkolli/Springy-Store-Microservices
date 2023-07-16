@@ -5,7 +5,6 @@ import com.siriusxi.ms.store.api.core.review.dto.Review;
 import com.siriusxi.ms.store.api.event.Event;
 import com.siriusxi.ms.store.util.exceptions.EventProcessingException;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
@@ -19,7 +18,6 @@ public class MessageProcessor {
 
     private final ReviewService service;
 
-    @Autowired
     public MessageProcessor(@Qualifier("ReviewServiceImpl") ReviewService service) {
         this.service = service;
     }

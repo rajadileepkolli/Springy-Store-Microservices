@@ -1,6 +1,5 @@
 package com.siriusxi.cloud.infra.auth.server.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,7 +34,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
   private final KeyPair keyPair;
   private final boolean jwtEnabled;
 
-  @Autowired
   public AuthorizationServerConfiguration(
       AuthenticationConfiguration authenticationConfiguration,
       KeyPair keyPair,

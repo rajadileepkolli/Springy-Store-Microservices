@@ -49,13 +49,13 @@ class RecommendationServiceApplicationTests {
   private AbstractMessageChannel input = null;
 
   @BeforeEach
-  public void setupDb() {
+  void setupDb() {
     input = (AbstractMessageChannel) channels.input();
     repository.deleteAll().block();
   }
 
   @Test
-  public void getRecommendationsByProductId() {
+  void getRecommendationsByProductId() {
 
     int productId = 1;
 
@@ -72,7 +72,7 @@ class RecommendationServiceApplicationTests {
   }
 
   @Test
-  public void duplicateError() {
+  void duplicateError() {
 
     int productId = 1;
     int recommendationId = 1;
@@ -96,7 +96,7 @@ class RecommendationServiceApplicationTests {
   }
 
   @Test
-  public void deleteRecommendations() {
+  void deleteRecommendations() {
 
     int productId = 1;
     int recommendationId = 1;
@@ -109,7 +109,7 @@ class RecommendationServiceApplicationTests {
   }
 
   @Test
-  public void getRecommendationsMissingParameter() {
+  void getRecommendationsMissingParameter() {
 
     getAndVerifyRecommendationsByProductId("", BAD_REQUEST)
         .jsonPath("$.path").isEqualTo(BASE_URI)
@@ -118,7 +118,7 @@ class RecommendationServiceApplicationTests {
   }
 
   @Test
-  public void getRecommendationsInvalidParameter() {
+  void getRecommendationsInvalidParameter() {
 
     getAndVerifyRecommendationsByProductId("?productId=no-integer", BAD_REQUEST)
         .jsonPath("$.path").isEqualTo(BASE_URI)
@@ -126,14 +126,14 @@ class RecommendationServiceApplicationTests {
   }
 
   @Test
-  public void getRecommendationsNotFound() {
+  void getRecommendationsNotFound() {
 
     getAndVerifyRecommendationsByProductId("?productId=113", OK)
         .jsonPath("$.length()").isEqualTo(0);
   }
 
   @Test
-  public void getRecommendationsInvalidParameterNegativeValue() {
+  void getRecommendationsInvalidParameterNegativeValue() {
 
     int productIdInvalid = -1;
 

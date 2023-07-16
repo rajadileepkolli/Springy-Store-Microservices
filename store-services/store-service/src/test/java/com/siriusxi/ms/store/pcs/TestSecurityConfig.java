@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 /**
  * The use of OAuth has been disabled when running Spring-based integration tests.
  * To prevent the OAuth machinery from kicking in when we are running integration tests.
@@ -19,11 +21,10 @@ public class TestSecurityConfig {
   @Bean
   public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
     return http
-            .csrf()
-              .disable()
-            .authorizeExchange()
-              .anyExchange().permitAll()
-            .and()
+            .csrf(withDefaults())
+            .disable()
+            .authorizeExchange(exchange -> exchange
+                    .anyExchange().permitAll())
             .build();
   }
 }

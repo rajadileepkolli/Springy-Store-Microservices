@@ -18,7 +18,7 @@ spring:
     uri: http://${CONFIG_SERVER_USR}:${CONFIG_SERVER_PWD}@${app.config-server.host}:${app.config-server.port}
 
 ---
-spring.profiles: docker
+spring.config.activate.on-profile: docker
 
 app:
   config-server:

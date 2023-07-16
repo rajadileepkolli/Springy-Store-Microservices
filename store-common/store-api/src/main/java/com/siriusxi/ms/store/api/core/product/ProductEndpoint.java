@@ -35,6 +35,6 @@ public interface ProductEndpoint extends ProductService {
   @Override
   Mono<Product> getProduct(
       @PathVariable("productId") int id,
-      @RequestParam(value = "delay", required = false, defaultValue = "0") int delay,
-      @RequestParam(value = "faultPercent", required = false, defaultValue = "0") int faultPercent);
+          @RequestParam(required = false, defaultValue = "0") int delay,
+          @RequestParam(required = false, defaultValue = "0") int faultPercent);
 }

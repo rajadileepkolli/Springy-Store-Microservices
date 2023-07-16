@@ -12,7 +12,6 @@ import com.siriusxi.ms.store.pcs.integration.StoreIntegration;
 import com.siriusxi.ms.store.util.exceptions.NotFoundException;
 import com.siriusxi.ms.store.util.http.ServiceUtil;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.handler.advice.RequestHandlerCircuitBreakerAdvice;
 import org.springframework.retry.RetryException;
 import org.springframework.security.core.context.SecurityContext;
@@ -38,7 +37,6 @@ public class StoreServiceImpl implements StoreService {
     private final StoreIntegration integration;
     private final SecurityContext nullSC = new SecurityContextImpl();
 
-    @Autowired
     public StoreServiceImpl(ServiceUtil serviceUtil, StoreIntegration integration) {
         this.serviceUtil = serviceUtil;
         this.integration = integration;

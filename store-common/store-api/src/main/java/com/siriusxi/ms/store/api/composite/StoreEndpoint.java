@@ -57,8 +57,8 @@ public interface StoreEndpoint extends StoreService {
   @Override
   Mono<ProductAggregate> getProduct(
       @PathVariable int id,
-      @RequestParam(value = "delay", required = false, defaultValue = "0") int delay,
-      @RequestParam(value = "faultPercent",required = false, defaultValue = "0") int faultPercent);
+          @RequestParam(required = false, defaultValue = "0") int delay,
+          @RequestParam(required = false, defaultValue = "0") int faultPercent);
   /**
    * Sample usage:
    *

@@ -8,7 +8,6 @@ import com.siriusxi.ms.store.util.exceptions.InvalidInputException;
 import com.siriusxi.ms.store.util.http.ServiceUtil;
 import lombok.extern.log4j.Log4j2;
 import org.reactivestreams.Publisher;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -28,7 +27,6 @@ public class ReviewServiceImpl implements ReviewService {
   private final ServiceUtil serviceUtil;
   private final Scheduler scheduler;
 
-  @Autowired
   public ReviewServiceImpl(
           Scheduler scheduler, ReviewRepository repository, ReviewMapper mapper,
           ServiceUtil serviceUtil) {
