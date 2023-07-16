@@ -34,7 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http
             // Disable CRCF to allow services to register themselves with Eureka
             .csrf(withDefaults())
-            .disable()
             .authorizeRequests(requests -> requests
                     .anyRequest().authenticated())
             .httpBasic(withDefaults());

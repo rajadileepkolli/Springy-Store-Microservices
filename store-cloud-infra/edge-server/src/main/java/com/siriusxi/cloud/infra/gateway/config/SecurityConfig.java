@@ -20,7 +20,7 @@ public class SecurityConfig {
 
     @Bean
     SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http)  {
-      http.csrf(withDefaults()).disable()
+      http.csrf(withDefaults())
               .authorizeExchange(exchange -> exchange
                       .pathMatchers("/headerrouting/**").permitAll()
                       .pathMatchers("/actuator/**").permitAll()

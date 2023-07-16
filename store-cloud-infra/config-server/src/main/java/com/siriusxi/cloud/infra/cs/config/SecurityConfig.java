@@ -14,7 +14,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       http
               // Disable CRCF to allow POST to /encrypt and /decrypt endpoints
               .csrf(withDefaults())
-              .disable()
               .authorizeRequests(requests -> requests
                       .anyRequest().authenticated())
               .httpBasic(withDefaults());
