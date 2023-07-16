@@ -5,7 +5,6 @@ import com.siriusxi.ms.store.revs.persistence.ReviewEntity;
 import com.siriusxi.ms.store.revs.service.ReviewMapper;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,7 +44,7 @@ class MapperTests {
     assertNotNull(mapper);
 
     Review api = new Review(1, 2, "a", "s", "C", "adr");
-    List<Review> apiList = Collections.singletonList(api);
+    List<Review> apiList = List.of(api);
 
     List<ReviewEntity> entityList = mapper.apiListToEntityList(apiList);
     assertEquals(apiList.size(), entityList.size());

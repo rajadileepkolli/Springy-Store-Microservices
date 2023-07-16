@@ -41,9 +41,6 @@ spring:
     #password: '{cipher}702b8ae88ce0d606c42cd89dd20c43be1100951373416f5eb6f2ab57b0288665'
   # Distributed Tracking configs
   zipkin.sender.type: rabbit
-  sleuth:
-    traceId128: true
-    sampler.probability: 1.0
 # Service discovery configs
 eureka:
   instance:
@@ -72,13 +69,15 @@ management:
     health.show-details: always
 
 logging.level:
-    org:
-      springframework:
-        web: DEBUG
-    web: DEBUG
-    root: INFO
-    com.siriusxi.ms.store: DEBUG
-    com.siriusxi.cloud.infra: DEBUG
+  org:
+    springframework:
+      web: DEBUG
+  web: DEBUG
+  root: INFO
+  com.siriusxi.ms.store: DEBUG
+  com.siriusxi.cloud.infra: DEBUG
+
+management.tracing.sampling.probability: 1.0
 
 # This is a docker specific profile properties
 # Also profiles could be separated in its owen file

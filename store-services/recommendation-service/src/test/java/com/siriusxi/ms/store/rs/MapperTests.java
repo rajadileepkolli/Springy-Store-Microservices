@@ -5,7 +5,6 @@ import com.siriusxi.ms.store.rs.persistence.RecommendationEntity;
 import com.siriusxi.ms.store.rs.service.RecommendationMapper;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,7 +44,7 @@ class MapperTests {
     assertNotNull(mapper);
 
     Recommendation api = new Recommendation(1, 2, "a", 4, "C", "adr");
-    List<Recommendation> apiList = Collections.singletonList(api);
+    List<Recommendation> apiList = List.of(api);
 
     List<RecommendationEntity> entityList = mapper.apiListToEntityList(apiList);
     assertEquals(apiList.size(), entityList.size());

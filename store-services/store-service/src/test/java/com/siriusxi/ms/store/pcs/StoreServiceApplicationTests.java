@@ -17,7 +17,8 @@ import org.springframework.test.web.reactive.server.WebTestClient.BodyContentSpe
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static java.util.Collections.singletonList;
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
@@ -59,13 +60,13 @@ class StoreServiceApplicationTests {
     when(storeIntegration.getRecommendations(PRODUCT_ID_OK))
         .thenReturn(
             Flux.fromIterable(
-                singletonList(
+                List.of(
                     new Recommendation(PRODUCT_ID_OK, 1, "author", 1, "content", "mock address"))));
 
     when(storeIntegration.getReviews(PRODUCT_ID_OK))
         .thenReturn(
             Flux.fromIterable(
-                singletonList(
+                List.of(
                     new Review(PRODUCT_ID_OK, 1, "author", "subject", "content", "mock address"))));
 
     when(storeIntegration.getProduct(eq(PRODUCT_ID_NOT_FOUND), anyInt(), anyInt()))

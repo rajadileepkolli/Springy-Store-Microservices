@@ -31,6 +31,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!-- End - Spring Stream processing using "RabbitMQ massaging" -->
         <!-- Start - Spring Stream processing using "Kafka" -->
         <dependency>
@@ -40,8 +45,8 @@
         <!-- End - Spring Stream processing using "Kafka" -->
         <!-- Start - Spring Cloud Distributed Tracking with "Zipkin" -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+            <groupId>io.zipkin.reporter2</groupId>
+            <artifactId>zipkin-reporter-brave</artifactId>
         </dependency>
         <!-- End - Spring Cloud Distributed Tracking with "Zipkin" -->
         <!-- End - Cloud dependencies -->

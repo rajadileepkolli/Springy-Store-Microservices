@@ -19,7 +19,7 @@
 
     <properties>
         <!-- Libraries versions -->
-        <spring.boot.dependencies.version>2.7.13</spring.boot.dependencies.version>
+        <spring.boot.dependencies.version>3.1.1</spring.boot.dependencies.version>
     </properties>
 
     <dependencyManagement>
@@ -39,6 +39,11 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-         </dependency>      
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <scope>provided</scope>
+        </dependency>      
     </dependencies>
 </project>

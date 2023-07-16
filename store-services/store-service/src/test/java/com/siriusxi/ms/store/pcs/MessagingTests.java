@@ -18,13 +18,13 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
 import static com.siriusxi.ms.store.api.event.Event.Type.CREATE;
 import static com.siriusxi.ms.store.api.event.Event.Type.DELETE;
 import static com.siriusxi.ms.store.pcs.IsSameEvent.sameEventExceptCreatedAt;
 import static java.lang.String.valueOf;
-import static java.util.Collections.singletonList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -93,8 +93,8 @@ class MessagingTests {
             1,
             "name",
             1,
-            singletonList(new RecommendationSummary(1, "a", 1, "c")),
-            singletonList(new ReviewSummary(1, "a", "s", "c")),
+            List.of(new RecommendationSummary(1, "a", 1, "c")),
+            List.of(new ReviewSummary(1, "a", "s", "c")),
             null);
 
     postAndVerifyProduct(composite);
