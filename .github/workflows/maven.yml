@@ -26,3 +26,4 @@ jobs:
       run: |
         ./setup.sh
         ./mvnw clean verify -Ddockerfile.skip
+        ./test-em-all.sh start
