@@ -15,9 +15,7 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.annotation.Output;
-import org.springframework.messaging.MessageChannel;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -30,12 +28,10 @@ import java.time.Duration;
 
 import static com.siriusxi.ms.store.api.event.Event.Type.CREATE;
 import static com.siriusxi.ms.store.api.event.Event.Type.DELETE;
-import static com.siriusxi.ms.store.pcs.integration.StoreIntegration.MessageSources;
 import static java.lang.String.valueOf;
 import static org.springframework.integration.support.MessageBuilder.withPayload;
 import static reactor.core.publisher.Flux.empty;
 
-@EnableBinding(MessageSources.class)
 @Component
 @Log4j2
 public class StoreIntegration implements ProductService, RecommendationService, ReviewService {
@@ -43,11 +39,12 @@ public class StoreIntegration implements ProductService, RecommendationService, 
   private final String PRODUCT_ID_QUERY_PARAM = "?productId=";
   private final WebClient.Builder webClientBuilder;
   private final ObjectMapper mapper;
-  private final MessageSources messageSources;
   private final String productServiceUrl;
   private final String recommendationServiceUrl;
   private final String reviewServiceUrl;
   private final int productServiceTimeoutSec;
+
+  private final StreamBridge streamBridge;
   private WebClient webClient;
 
   public StoreIntegration(
@@ -57,12 +54,12 @@ public class StoreIntegration implements ProductService, RecommendationService, 
           @Value("${app.product-service.host}") String productServiceHost,
           @Value("${app.recommendation-service.host}") String recommendationServiceHost,
           @Value("${app.review-service.host}") String reviewServiceHost,
-          @Value("${app.product-service.timeoutSec}") int productServiceTimeoutSec) {
+          @Value("${app.product-service.timeoutSec}") int productServiceTimeoutSec, StreamBridge streamBridge) {
 
     this.webClientBuilder = webClientBuilder;
     this.mapper = mapper;
-    this.messageSources = messageSources;
     this.productServiceTimeoutSec = productServiceTimeoutSec;
+    this.streamBridge = streamBridge;
 
     var http = "http://";
 
@@ -74,9 +71,7 @@ public class StoreIntegration implements ProductService, RecommendationService, 
   @Override
   public Product createProduct(Product body) {
     log.debug("Publishing a create event for a new product {}",body.toString());
-    messageSources
-            .outputProducts()
-            .send(withPayload(new Event<>(CREATE, body.getProductId(), body)).build());
+    streamBridge.send(MessageSources.OUTPUT_PRODUCTS,withPayload(new Event<>(CREATE, body.getProductId(), body)).build());
     return body;
   }
 
@@ -103,18 +98,16 @@ public class StoreIntegration implements ProductService, RecommendationService, 
   @Override
   public void deleteProduct(int productId) {
     log.debug("Publishing a delete event for product id {}", productId);
-    messageSources
-            .outputProducts()
-            .send(withPayload(new Event<>(DELETE, productId, null)).build());
+    streamBridge.send(MessageSources.OUTPUT_PRODUCTS,
+        withPayload(new Event<>(DELETE, productId, null)).build());
   }
 
   @Override
   public Recommendation createRecommendation(Recommendation body) {
     log.debug("Publishing a create event for a new recommendation {}",body.toString());
 
-    messageSources
-            .outputRecommendations()
-            .send(withPayload(new Event<>(CREATE, body.getProductId(), body)).build());
+    streamBridge.send(MessageSources.OUTPUT_RECOMMENDATIONS,
+            withPayload(new Event<>(CREATE, body.getProductId(), body)).build());
 
     return body;
   }
@@ -143,16 +136,14 @@ public class StoreIntegration implements ProductService, RecommendationService, 
 
   @Override
   public void deleteRecommendations(int productId) {
-    messageSources
-            .outputRecommendations()
-            .send(withPayload(new Event<>(DELETE, productId, null)).build());
+    streamBridge.send(MessageSources.OUTPUT_RECOMMENDATIONS,
+      withPayload(new Event<>(DELETE, productId, null)).build());
   }
 
   @Override
   public Review createReview(Review body) {
-    messageSources
-            .outputReviews()
-            .send(withPayload(new Event<>(CREATE, body.getProductId(), body)).build());
+    streamBridge.send(MessageSources.OUTPUT_REVIEWS,
+    withPayload(new Event<>(CREATE, body.getProductId(), body)).build());
     return body;
   }
 
@@ -180,9 +171,7 @@ public class StoreIntegration implements ProductService, RecommendationService, 
 
   @Override
   public void deleteReviews(int productId) {
-    messageSources
-            .outputReviews()
-            .send(withPayload(new Event<>(DELETE, productId, null)).build());
+    streamBridge.send(MessageSources.OUTPUT_REVIEWS, withPayload(new Event<>(DELETE, productId, null)).build());
   }
 
   private WebClient getWebClient() {
@@ -198,9 +187,9 @@ public class StoreIntegration implements ProductService, RecommendationService, 
       return ex;
     }
 
-    return switch (wcre.getStatusCode()) {
-      case NOT_FOUND -> new NotFoundException(getErrorMessage(wcre));
-      case UNPROCESSABLE_ENTITY -> new InvalidInputException(getErrorMessage(wcre));
+    return switch (wcre.getStatusCode().value()) {
+      case 404 -> new NotFoundException(getErrorMessage(wcre));
+      case 422 -> new InvalidInputException(getErrorMessage(wcre));
       default -> {
         log.warn("Got a unexpected HTTP error: {}, will rethrow it", wcre.getStatusCode());
         log.warn("Error body: {}", wcre.getResponseBodyAsString());
@@ -223,13 +212,5 @@ public class StoreIntegration implements ProductService, RecommendationService, 
     String OUTPUT_RECOMMENDATIONS = "output-recommendations";
     String OUTPUT_REVIEWS = "output-reviews";
 
-    @Output(OUTPUT_PRODUCTS)
-    MessageChannel outputProducts();
-
-    @Output(OUTPUT_RECOMMENDATIONS)
-    MessageChannel outputRecommendations();
-
-    @Output(OUTPUT_REVIEWS)
-    MessageChannel outputReviews();
   }
 }

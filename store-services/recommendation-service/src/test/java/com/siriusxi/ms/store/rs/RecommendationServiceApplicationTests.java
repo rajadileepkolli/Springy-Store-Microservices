@@ -8,14 +8,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.http.HttpStatus;
 import org.springframework.integration.channel.AbstractMessageChannel;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.web.reactive.server.WebTestClient.BodyContentSpec;
-import reactor.core.publisher.Mono;
 
 import static com.siriusxi.ms.store.api.event.Event.Type.CREATE;
 import static com.siriusxi.ms.store.api.event.Event.Type.DELETE;
@@ -43,14 +42,15 @@ class RecommendationServiceApplicationTests {
 
   @Autowired private RecommendationRepository repository;
 
-  @Autowired
-  private Sink channels;
-
-  private AbstractMessageChannel input = null;
+  private AbstractMessageChannel input = new AbstractMessageChannel() {
+    @Override
+    protected boolean doSend(Message<?> message, long timeout) {
+      return false;
+    }
+  };
 
   @BeforeEach
   void setupDb() {
-    input = (AbstractMessageChannel) channels.input();
     repository.deleteAll().block();
   }
 

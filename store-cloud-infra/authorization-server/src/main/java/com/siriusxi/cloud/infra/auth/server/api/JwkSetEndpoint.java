@@ -2,7 +2,7 @@ package com.siriusxi.cloud.infra.auth.server.api;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
-import org.springframework.security.oauth2.provider.endpoint.FrameworkEndpoint;
+//import org.springframework.security.oauth2.provider.endpoint.FrameworkEndpoint;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,7 +16,7 @@ import java.util.Map;
  *
  * <p>This class adds ad-hoc support in order to better support the other samples in the repo.
  */
-@FrameworkEndpoint
+//@FrameworkEndpoint
 class JwkSetEndpoint {
   KeyPair keyPair;
 

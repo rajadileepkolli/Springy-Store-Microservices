@@ -21,10 +21,10 @@ class UserConfig {
 
   @Bean
   SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.authorizeRequests(requests -> requests
-            .antMatchers("/actuator/**")
+    http.authorizeHttpRequests(requests -> requests
+            .requestMatchers("/actuator/**")
             .permitAll()
-            .mvcMatchers("/.well-known/jwks.json")
+            .requestMatchers("/.well-known/jwks.json")
             .permitAll()
             .anyRequest()
             .authenticated())
@@ -35,7 +35,6 @@ class UserConfig {
   }
 
   @Bean
-  @Override
   public UserDetailsService userDetailsService() {
 
     return new InMemoryUserDetailsManager(

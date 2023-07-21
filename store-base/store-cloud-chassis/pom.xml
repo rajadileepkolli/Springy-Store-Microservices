@@ -31,11 +31,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <scope>test</scope>
-        </dependency>
         <!-- End - Spring Stream processing using "RabbitMQ massaging" -->
         <!-- Start - Spring Stream processing using "Kafka" -->
         <dependency>
@@ -165,7 +160,7 @@
                      an application is deployed
                 -->
                 <groupId>io.github.git-commit-id</groupId>
-                <artifactId>git-commit-id-plugin</artifactId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
                 <executions>
                     <execution>
                         <id>get-the-git-infos</id>
