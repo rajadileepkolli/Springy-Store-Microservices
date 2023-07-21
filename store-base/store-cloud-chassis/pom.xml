@@ -164,7 +164,7 @@
                      so that you are able to verify the versioning information when
                      an application is deployed
                 -->
-                <groupId>pl.project13.maven</groupId>
+                <groupId>io.github.git-commit-id</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>
                 <executions>
                     <execution>
