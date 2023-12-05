@@ -34,7 +34,7 @@
         <maven.plugin.dockerfile.version>1.4.13</maven.plugin.dockerfile.version>
         <springdoc-openapi.version>2.3.0</springdoc-openapi.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
-        <org.lombok.version>1.18.28</org.lombok.version>
+        <org.lombok.version>1.18.30</org.lombok.version>
 
         <!--Plugins control points -->
         <maven.deploy.skip>true</maven.deploy.skip>
