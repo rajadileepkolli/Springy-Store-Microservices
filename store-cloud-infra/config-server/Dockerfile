@@ -1,7 +1,7 @@
 #### Start of builder image
 # ------------------------
 # Builder stage to prepare application for final image
-FROM openjdk:20-slim-buster as builder
+FROM openjdk:21-slim-buster as builder
 WORKDIR temp
 
 # Fatjar location, but could be set to different location from command line
@@ -23,7 +23,7 @@ else echo "Directory [snapshot-deps] already exists."; fi
 #### Start of actual image
 # ------------------------
 # Build image based on latest JDK 15 base image, based on latest debian buster OS
-FROM openjdk:19-slim-buster
+FROM openjdk:21-slim-buster
 
 # Set image information, but could be set to different location from command line
 ARG IMAGE_VERSION="1.0-SNAPSHOT"
